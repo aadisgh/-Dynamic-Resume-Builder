@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import { useForm, useFieldArray } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
@@ -47,6 +47,29 @@ export default function ExperienceForm({ data, onChange }: ExperienceFormProps) 
   const handleFormChange = (values: { experiences: Experience[] }) => {
     onChange(values.experiences);
   };
+
+  // Watch for real-time changes
+  useEffect(() => {
+    const subscription = form.watch((value) => {
+      if (value.experiences) {
+        // Filter out undefined and validate each experience
+        const validExperiences = value.experiences
+          .filter((exp): exp is NonNullable<typeof exp> => exp && typeof exp === 'object')
+          .map(exp => ({
+            id: exp.id || '',
+            jobTitle: exp.jobTitle || '',
+            company: exp.company || '',
+            location: exp.location || '',
+            startDate: exp.startDate || '',
+            endDate: exp.endDate || '',
+            current: Boolean(exp.current),
+            description: exp.description || '',
+          }));
+        onChange(validExperiences);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [form, onChange]);
 
   return (
     <div className="space-y-4">

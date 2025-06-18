@@ -1,4 +1,5 @@
 import { useForm, useFieldArray } from "react-hook-form";
+import { useEffect } from "react";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { Button } from "@/components/ui/button";
 import { Form, FormControl, FormField, FormItem, FormLabel, FormMessage } from "@/components/ui/form";
@@ -42,6 +43,26 @@ export default function EducationForm({ data, onChange }: EducationFormProps) {
   const handleFormChange = (values: { education: Education[] }) => {
     onChange(values.education);
   };
+
+  // Watch for real-time changes
+  useEffect(() => {
+    const subscription = form.watch((value) => {
+      if (value.education) {
+        const validEducation = value.education
+          .filter(edu => edu && typeof edu === 'object')
+          .map(edu => ({
+            id: edu.id || '',
+            degree: edu.degree || '',
+            institution: edu.institution || '',
+            location: edu.location || '',
+            graduationYear: edu.graduationYear || '',
+            gpa: edu.gpa || '',
+          }));
+        onChange(validEducation);
+      }
+    });
+    return () => subscription.unsubscribe();
+  }, [form, onChange]);
 
   return (
     <div className="space-y-4">

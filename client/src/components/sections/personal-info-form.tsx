@@ -17,13 +17,17 @@ export default function PersonalInfoForm({ data, onChange }: PersonalInfoFormPro
     defaultValues: data,
   });
 
-  const watchedValues = form.watch();
-
   useEffect(() => {
-    const subscription = form.watch((value) => {
-      const validatedData = personalInfoSchema.safeParse(value);
-      if (validatedData.success) {
-        onChange(validatedData.data);
+    const subscription = form.watch((value, { name, type }) => {
+      if (type === 'change') {
+        // Only validate and update if there are actual changes
+        const validatedData = personalInfoSchema.safeParse(value);
+        if (validatedData.success) {
+          onChange(validatedData.data);
+        } else {
+          // Even if validation fails, still update with current values for live preview
+          onChange(value as any);
+        }
       }
     });
     return () => subscription.unsubscribe();
