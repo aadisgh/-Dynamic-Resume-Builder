@@ -2,14 +2,18 @@ import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { ZoomIn, ZoomOut, Smartphone, Monitor, Download } from "lucide-react";
 import ModernTemplate from "./templates/modern-template";
+import ClassicTemplate from "./templates/classic-template";
+import CreativeTemplate from "./templates/creative-template";
+import MinimalTemplate from "./templates/minimal-template";
 import type { ResumeData } from "@shared/schema";
 
 interface ResumePreviewProps {
   resumeData: ResumeData;
   onExportPDF: () => void;
+  selectedTemplate: string;
 }
 
-export default function ResumePreview({ resumeData, onExportPDF }: ResumePreviewProps) {
+export default function ResumePreview({ resumeData, onExportPDF, selectedTemplate }: ResumePreviewProps) {
   const [zoomLevel, setZoomLevel] = useState(80);
   const [previewMode, setPreviewMode] = useState<'desktop' | 'mobile'>('desktop');
 
@@ -87,7 +91,10 @@ export default function ResumePreview({ resumeData, onExportPDF }: ResumePreview
             transformOrigin: 'top center',
           }}
         >
-          <ModernTemplate resumeData={resumeData} />
+          {selectedTemplate === 'modern' && <ModernTemplate resumeData={resumeData} />}
+          {selectedTemplate === 'classic' && <ClassicTemplate resumeData={resumeData} />}
+          {selectedTemplate === 'creative' && <CreativeTemplate resumeData={resumeData} />}
+          {selectedTemplate === 'minimal' && <MinimalTemplate resumeData={resumeData} />}
         </div>
       </div>
     </div>

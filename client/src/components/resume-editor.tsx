@@ -11,11 +11,13 @@ import type { ResumeData } from "@shared/schema";
 interface ResumeEditorProps {
   resumeData: ResumeData;
   onUpdate: (data: Partial<ResumeData>) => void;
+  selectedTemplate: string;
+  onTemplateChange: (template: string) => void;
 }
 
 type Section = 'personal' | 'experience' | 'education' | 'skills';
 
-export default function ResumeEditor({ resumeData, onUpdate }: ResumeEditorProps) {
+export default function ResumeEditor({ resumeData, onUpdate, selectedTemplate, onTemplateChange }: ResumeEditorProps) {
   const [activeSection, setActiveSection] = useState<Section>('personal');
   const [collapsed, setCollapsed] = useState(false);
 
@@ -27,8 +29,7 @@ export default function ResumeEditor({ resumeData, onUpdate }: ResumeEditorProps
   ];
 
   const handleTemplateChange = (template: string) => {
-    // TODO: Implement template switching
-    console.log('Template changed to:', template);
+    onTemplateChange(template);
   };
 
   const handleCustomizationChange = (key: string, value: any) => {
