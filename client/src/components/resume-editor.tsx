@@ -109,7 +109,7 @@ export default function ResumeEditor({ resumeData, onUpdate, selectedTemplate, o
         {/* Template Selector */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">Choose Template</label>
-          <Select onValueChange={handleTemplateChange} defaultValue="modern">
+          <Select onValueChange={handleTemplateChange} value={selectedTemplate}>
             <SelectTrigger>
               <SelectValue placeholder="Select template" />
             </SelectTrigger>

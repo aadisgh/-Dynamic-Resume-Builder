@@ -10,6 +10,7 @@ import { useToast } from "@/hooks/use-toast";
 export default function ResumeBuilder() {
   const { resumeData, updateResumeData, saveResume, isLoading } = useResumeData();
   const { toast } = useToast();
+  const [selectedTemplate, setSelectedTemplate] = useState("modern");
   
   const handleSave = async () => {
     try {
