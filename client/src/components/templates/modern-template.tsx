@@ -9,33 +9,57 @@ export default function ModernTemplate({ resumeData }: ModernTemplateProps) {
   const { personal, experiences, education, skills, customization } = resumeData;
 
   const getColorClass = (scheme: string) => {
-    switch (scheme) {
-      case 'secondary':
-        return 'bg-secondary text-secondary-foreground';
-      case 'accent':
-        return 'bg-accent text-accent-foreground';
-      case 'success':
-        return 'bg-success text-success-foreground';
-      case 'dark':
-        return 'bg-gray-800 text-white';
-      default:
-        return 'bg-primary text-primary-foreground';
+    const colorMap: Record<string, string> = {
+      secondary: 'bg-secondary text-secondary-foreground',
+      accent: 'bg-accent text-accent-foreground',
+      success: 'bg-success text-success-foreground',
+      dark: 'bg-gray-800 text-white',
+      coral: 'text-white',
+      gold: 'text-white',
+      rose: 'text-white',
+      navy: 'text-white',
+      primary: 'bg-primary text-primary-foreground'
+    };
+    
+    const customColors: Record<string, string> = {
+      coral: 'hsl(16, 100%, 66%)',
+      gold: 'hsl(45, 100%, 51%)',
+      rose: 'hsl(330, 81%, 60%)',
+      navy: 'hsl(213, 94%, 27%)'
+    };
+
+    if (customColors[scheme]) {
+      return `text-white`;
     }
+    
+    return colorMap[scheme] || colorMap.primary;
   };
 
   const getTextColorClass = (scheme: string) => {
-    switch (scheme) {
-      case 'secondary':
-        return 'text-secondary';
-      case 'accent':
-        return 'text-accent';
-      case 'success':
-        return 'text-success';
-      case 'dark':
-        return 'text-gray-800';
-      default:
-        return 'text-primary';
-    }
+    const colorMap: Record<string, string> = {
+      secondary: 'text-secondary',
+      accent: 'text-accent',
+      success: 'text-success',
+      dark: 'text-gray-800',
+      coral: 'text-orange-600',
+      gold: 'text-yellow-600',
+      rose: 'text-pink-600',
+      navy: 'text-blue-800',
+      primary: 'text-primary'
+    };
+    
+    return colorMap[scheme] || colorMap.primary;
+  };
+
+  const getHeaderStyle = (scheme: string) => {
+    const customColors: Record<string, string> = {
+      coral: 'hsl(16, 100%, 66%)',
+      gold: 'hsl(45, 100%, 51%)',
+      rose: 'hsl(330, 81%, 60%)',
+      navy: 'hsl(213, 94%, 27%)'
+    };
+
+    return customColors[scheme] ? { backgroundColor: customColors[scheme] } : {};
   };
 
   const getBadgeColorClass = (scheme: string, index: number) => {
@@ -53,7 +77,7 @@ export default function ModernTemplate({ resumeData }: ModernTemplateProps) {
   return (
     <div className={`h-full ${fontClass}`}>
       {/* Header Section */}
-      <div className={`${getColorClass(customization.colorScheme)} p-8`}>
+      <div className={`${getColorClass(customization.colorScheme)} p-8`} style={getHeaderStyle(customization.colorScheme)}>
         <div className="flex items-start justify-between">
           <div className="flex-1">
             <h1 className="text-3xl font-bold mb-2">

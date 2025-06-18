@@ -107,10 +107,13 @@ export default function ResumeBuilder() {
         <ResumeEditor 
           resumeData={resumeData}
           onUpdate={updateResumeData}
+          selectedTemplate={selectedTemplate}
+          onTemplateChange={setSelectedTemplate}
         />
         <ResumePreview 
           resumeData={resumeData}
           onExportPDF={handleExportPDF}
+          selectedTemplate={selectedTemplate}
         />
       </div>
 

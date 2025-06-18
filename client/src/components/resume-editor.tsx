@@ -151,24 +151,30 @@ export default function ResumeEditor({ resumeData, onUpdate, selectedTemplate, o
         {/* Color Scheme */}
         <div className="mb-4">
           <label className="block text-sm font-medium text-gray-700 mb-2">Color Scheme</label>
-          <div className="flex space-x-2">
+          <div className="grid grid-cols-3 gap-2">
             {[
-              { name: 'primary', color: 'hsl(239, 84%, 67%)' },
-              { name: 'secondary', color: 'hsl(266, 85%, 70%)' },
-              { name: 'accent', color: 'hsl(186, 94%, 43%)' },
-              { name: 'success', color: 'hsl(158, 64%, 52%)' },
-              { name: 'dark', color: 'hsl(240, 10%, 11%)' },
-            ].map(({ name, color }) => (
-              <button
-                key={name}
-                onClick={() => handleCustomizationChange('colorScheme', name)}
-                className={`w-8 h-8 rounded-full border-2 shadow-sm ${
-                  resumeData.customization.colorScheme === name
-                    ? 'border-gray-800'
-                    : 'border-gray-300'
-                }`}
-                style={{ backgroundColor: color }}
-              />
+              { name: 'primary', color: 'hsl(239, 84%, 67%)', label: 'Royal Blue' },
+              { name: 'secondary', color: 'hsl(266, 85%, 70%)', label: 'Purple' },
+              { name: 'accent', color: 'hsl(186, 94%, 43%)', label: 'Cyan' },
+              { name: 'success', color: 'hsl(158, 64%, 52%)', label: 'Green' },
+              { name: 'dark', color: 'hsl(240, 10%, 11%)', label: 'Black' },
+              { name: 'coral', color: 'hsl(16, 100%, 66%)', label: 'Coral' },
+              { name: 'gold', color: 'hsl(45, 100%, 51%)', label: 'Gold' },
+              { name: 'rose', color: 'hsl(330, 81%, 60%)', label: 'Rose' },
+              { name: 'navy', color: 'hsl(213, 94%, 27%)', label: 'Navy' },
+            ].map(({ name, color, label }) => (
+              <div key={name} className="text-center">
+                <button
+                  onClick={() => handleCustomizationChange('colorScheme', name)}
+                  className={`w-8 h-8 rounded-full border-2 shadow-sm mx-auto mb-1 ${
+                    resumeData.customization.colorScheme === name
+                      ? 'border-gray-800 ring-2 ring-gray-400'
+                      : 'border-gray-300'
+                  }`}
+                  style={{ backgroundColor: color }}
+                />
+                <span className="text-xs text-gray-600">{label}</span>
+              </div>
             ))}
           </div>
         </div>
