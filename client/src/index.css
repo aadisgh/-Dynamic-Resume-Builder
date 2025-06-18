@@ -93,7 +93,8 @@
   }
 
   .section-nav-btn.active {
-    @apply text-primary bg-primary/10;
+    @apply text-primary;
+    background-color: hsl(var(--primary) / 0.1);
   }
 
   .section-nav-btn:not(.active) {

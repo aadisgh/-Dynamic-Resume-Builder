@@ -31,8 +31,11 @@ export class MemStorage implements IStorage {
     const id = this.currentId++;
     const now = new Date();
     const resume: Resume = { 
-      ...insertResume, 
       id,
+      userId: insertResume.userId || null,
+      title: insertResume.title,
+      data: insertResume.data,
+      template: insertResume.template || "modern",
       createdAt: now,
       updatedAt: now,
     };
