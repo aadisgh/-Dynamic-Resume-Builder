@@ -1,0 +1,108 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&family=Poppins:wght@300;400;500;600;700&display=swap');
+
+:root {
+  --background: hsl(248, 50%, 99%);
+  --foreground: hsl(240, 10%, 11%);
+  --muted: hsl(240, 5%, 96%);
+  --muted-foreground: hsl(240, 4%, 46%);
+  --popover: hsl(0, 0%, 100%);
+  --popover-foreground: hsl(240, 10%, 11%);
+  --card: hsl(0, 0%, 100%);
+  --card-foreground: hsl(240, 10%, 11%);
+  --border: hsl(240, 6%, 90%);
+  --input: hsl(240, 6%, 90%);
+  --primary: hsl(239, 84%, 67%);
+  --primary-foreground: hsl(239, 100%, 99%);
+  --secondary: hsl(266, 85%, 70%);
+  --secondary-foreground: hsl(266, 100%, 99%);
+  --accent: hsl(186, 94%, 43%);
+  --accent-foreground: hsl(186, 100%, 99%);
+  --success: hsl(158, 64%, 52%);
+  --success-foreground: hsl(158, 100%, 99%);
+  --destructive: hsl(0, 84%, 60%);
+  --destructive-foreground: hsl(60, 9%, 98%);
+  --ring: hsl(240, 10%, 11%);
+  --radius: 0.5rem;
+}
+
+.dark {
+  --background: hsl(240, 10%, 4%);
+  --foreground: hsl(0, 0%, 98%);
+  --muted: hsl(240, 4%, 16%);
+  --muted-foreground: hsl(240, 5%, 65%);
+  --popover: hsl(240, 10%, 4%);
+  --popover-foreground: hsl(0, 0%, 98%);
+  --card: hsl(240, 10%, 4%);
+  --card-foreground: hsl(0, 0%, 98%);
+  --border: hsl(240, 4%, 16%);
+  --input: hsl(240, 4%, 16%);
+  --primary: hsl(239, 84%, 67%);
+  --primary-foreground: hsl(239, 100%, 99%);
+  --secondary: hsl(266, 85%, 70%);
+  --secondary-foreground: hsl(266, 100%, 99%);
+  --accent: hsl(186, 94%, 43%);
+  --accent-foreground: hsl(186, 100%, 99%);
+  --success: hsl(158, 64%, 52%);
+  --success-foreground: hsl(158, 100%, 99%);
+  --destructive: hsl(0, 62%, 31%);
+  --destructive-foreground: hsl(0, 0%, 98%);
+  --ring: hsl(240, 5%, 84%);
+}
+
+@layer base {
+  * {
+    @apply border-border;
+  }
+
+  body {
+    @apply font-sans antialiased bg-background text-foreground;
+    font-family: 'Inter', sans-serif;
+  }
+
+  .font-poppins {
+    font-family: 'Poppins', sans-serif;
+  }
+
+  .font-inter {
+    font-family: 'Inter', sans-serif;
+  }
+}
+
+@layer components {
+  .resume-editor-grid {
+    display: grid;
+    grid-template-columns: 1fr 2fr;
+    height: calc(100vh - 4rem);
+  }
+
+  .resume-preview-scale {
+    transform: scale(0.8);
+    transform-origin: top center;
+  }
+
+  .floating-action-btn {
+    @apply w-12 h-12 rounded-full shadow-lg hover:shadow-xl transform hover:scale-105 transition-all duration-200 flex items-center justify-center;
+  }
+
+  .section-nav-btn {
+    @apply p-3 text-sm font-medium rounded-lg transition-colors text-center;
+  }
+
+  .section-nav-btn.active {
+    @apply text-primary bg-primary/10;
+  }
+
+  .section-nav-btn:not(.active) {
+    @apply text-gray-600 hover:text-primary hover:bg-gray-50;
+  }
+}
+
+@media print {
+  .resume-preview-scale {
+    transform: none !important;
+  }
+}
